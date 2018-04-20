@@ -184,7 +184,7 @@ int InfixToPostfix::Is_open_parentheses(int index){
 	//seq 2: <term>
 	//seq 3: )
 	tmp_str.AppendChar(tmpbuf[index]);
-	//seq 0: <term> 
+	//seq 0: <fun> 
 	for (i = index + 1; i < len; i++){
 
 		//공백 넘기기
@@ -221,7 +221,7 @@ int InfixToPostfix::Is_open_parentheses(int index){
 		return i - 1;
 	}
 
-	//seq 1: <fun>
+	//seq 1: <term>
 	for (; i < len; i++){
 		//공백 넘기기
 		if (tmpbuf[i] == ' ' || tmpbuf[i] == '\t') {
