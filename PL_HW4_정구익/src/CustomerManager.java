@@ -1,7 +1,10 @@
 import java.util.Vector;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -9,13 +12,13 @@ public class CustomerManager {
 	Scanner scan = new Scanner(System.in);
 	Vector<Customer> Customers = new Vector<Customer>();
 	
-	public void addMember(int ID, String join_day, String name, String phone_num, String birth)
+	public void AddMember(int ID, String join_day, String name, String phone_num, String birth)
 	{
 		Customer customer = new Customer(ID, join_day, name, phone_num, birth);
 		Customers.add(customer);
 	}
 	
-	public void removeMember(int ID)
+	public void RemoveMember(int ID)
 	{
 		Customer customer = Find(ID);
 		if(customer == null)
@@ -25,7 +28,7 @@ public class CustomerManager {
 		Customers.remove(customer);
 	}
 	
-	public void menuorder(int ID, String menu, String orderday)
+	public void MenuOrder(int ID, String menu, String orderday)
 	{
 		Customer customer = Find(ID);
 		File file = new File("custom.txt");
@@ -35,7 +38,7 @@ public class CustomerManager {
 		try
 		{
 			writer = new FileWriter(file, true);
-			writer.write(message);
+			writer.write(message+"\n");
 			writer.flush();
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -60,6 +63,45 @@ public class CustomerManager {
 		else
 			customer.order_cound_up();
 	}
+	
+	public void OrderCancle(int ID, String menu, String orderday)
+	{
+		Customer customer = Find(ID);
+		File file = new File("custom.txt");
+		FileWriter writer = null;
+		FileReader reader = null;
+		BufferedReader breader = null;
+		BufferedWriter bwriter = null;
+		String read = null;
+		String message = "정구익"+" : "+menu+"("+orderday+")";
+		
+		try
+		{
+			reader = new FileReader(file);
+			writer = new FileWriter(file, false);
+			breader = new BufferedReader(reader);
+			bwriter = new BufferedWriter(writer);
+			while((read=breader.readLine())!=null)
+			{
+				if(!read.equals(message)) // 일치하지 않은 주문이면 다시 텍스트 파일에 입력
+				{
+					bwriter.write(read);
+					bwriter.newLine();
+				}
+			}
+		}  catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}  catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(breader != null)
+				try {
+					breader.close();
+				} catch (IOException e) {}
+		}
+	}
+
+	
 	
 	public Customer Find(int ID) 
 	{

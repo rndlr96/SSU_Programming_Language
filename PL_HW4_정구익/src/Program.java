@@ -15,7 +15,7 @@ public class Program extends JFrame{
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  TabPanel();
 		  setTitle("绊按包府矫胶袍");
-		  setSize(500, 300);
+		  setSize(500, 350);
 		    
 		  setVisible(true);
 	}
@@ -57,7 +57,7 @@ public class Program extends JFrame{
 		ActionListener order = new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{
-				manager.menuorder(
+				manager.MenuOrder(
 						Integer.parseInt(first_txt2.getText()), 
 						first_combo.getItemAt(first_combo.getSelectedIndex()).toString(),
 						first_txt1.getText()
@@ -65,6 +65,19 @@ public class Program extends JFrame{
 			}
 		};
 		first_Button1.addActionListener(order);
+		
+		ActionListener order_cencle = new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				manager.OrderCancle(
+						Integer.parseInt(first_txt2.getText()), 
+						first_combo.getItemAt(first_combo.getSelectedIndex()).toString(),
+						first_txt1.getText()
+						);
+				
+			}
+		};
+		first_Button2.addActionListener(order_cencle);
 		
 		
 		  
@@ -76,6 +89,8 @@ public class Program extends JFrame{
 		second_Label3.setPreferredSize(new Dimension(100, 40));
 		JLabel second_Label4 = new JLabel(" 啊 涝 老");
 		second_Label4.setPreferredSize(new Dimension(100, 40));
+		JLabel second_Label5 = new JLabel(" 积     老");
+		second_Label5.setPreferredSize(new Dimension(100, 40));
 		JButton second_Button1 = new JButton("绊按殿废");
 		JButton second_Button2 = new JButton("绊按八祸");	
 		JButton second_Button3 = new JButton("绊按昏力");		
@@ -83,6 +98,7 @@ public class Program extends JFrame{
 		JTextArea second_txt2 = new JTextArea(2, 30);
 		JTextArea second_txt3 = new JTextArea(2, 30);
 		JTextArea second_txt4 = new JTextArea(2, 30);
+		JTextArea second_txt5 = new JTextArea(2, 30);
 
 		JPanel mainPane2 = new JPanel();
 		
@@ -94,10 +110,29 @@ public class Program extends JFrame{
 		mainPane2.add(second_txt3);
 		mainPane2.add(second_Label4);
 		mainPane2.add(second_txt4);
+		mainPane2.add(second_Label5);
+		mainPane2.add(second_txt5);
 		mainPane2.add(second_Button1);
 		mainPane2.add(second_Button2);
 		mainPane2.add(second_Button3);
 		tPane.addTab("绊按包府", mainPane2);	
+		
+		ActionListener join = new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				manager.AddMember(
+						Integer.parseInt(second_txt1.getText()), 
+						second_txt4.getText(), 
+						second_txt2.getText(), 
+						second_txt3.getText(), 
+						second_txt5.getText()
+						);
+			}
+		};
+		second_Button1.addActionListener(join);
+		
+		
+		
 		
 	}
 
