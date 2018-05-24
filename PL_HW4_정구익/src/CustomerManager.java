@@ -1,4 +1,7 @@
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,13 +36,16 @@ public class CustomerManager {
 		Customer customer = Find(ID);
 		File file = new File("custom.txt");
 		FileWriter writer = null;
+		BufferedWriter bwriter = null;
 		String message = "정구익"+" : "+menu+"("+orderday+")";
 		
 		try
 		{
 			writer = new FileWriter(file, true);
-			writer.write(message+"\n");
-			writer.flush();
+			bwriter = new BufferedWriter(writer);
+			bwriter.write(message);
+			bwriter.newLine();
+			bwriter.flush();
 		} catch(IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -54,10 +60,11 @@ public class CustomerManager {
 		{
 			// 예외처리
 		}
-		if(customer.getcount() == 3)
+		if(customer.getcount() == 2)
 		{
 			// 쿠폰 발송 이벤트 발생
-			
+			JOptionPane.showMessageDialog(null, ID+"번 고객님\n무료쿠폰이 배송되었습니다.", "쿠폰 발행", JOptionPane.PLAIN_MESSAGE);
+
 			customer.order_count_init();
 		}
 		else

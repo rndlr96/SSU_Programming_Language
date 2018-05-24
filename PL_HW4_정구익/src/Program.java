@@ -131,9 +131,25 @@ public class Program extends JFrame{
 		};
 		second_Button1.addActionListener(join);
 		
+		ActionListener search = new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				Customer customer = manager.Find(Integer.parseInt(second_txt1.getText()));
+				second_txt2.setText(customer.getname());
+				second_txt3.setText(customer.getphone());
+				second_txt4.setText(customer.getday());
+				second_txt5.setText(customer.getbirth());
+			}
+		};
+		second_Button2.addActionListener(search);
 		
-		
-		
+		ActionListener remove = new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				manager.RemoveMember(Integer.parseInt(second_txt1.getText()));
+			}
+		};
+		second_Button3.addActionListener(remove);
 	}
 
 	
