@@ -25,12 +25,12 @@ public class CustomerManager {
 		Customers.remove(customer);
 	}
 	
-	public void menuorder(int ID, String menu)
+	public void menuorder(int ID, String menu, String orderday)
 	{
 		Customer customer = Find(ID);
 		File file = new File("custom.txt");
 		FileWriter writer = null;
-		String message = customer.getname()+"	:	"+menu;
+		String message = "¡§±∏¿Õ"+" : "+menu+"("+orderday+")";
 		
 		try
 		{

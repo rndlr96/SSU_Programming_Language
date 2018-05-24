@@ -3,9 +3,12 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextArea;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Program extends JFrame{
+	
+	private CustomerManager manager = new CustomerManager();
 	
 	public Program() 
 	{
@@ -16,6 +19,7 @@ public class Program extends JFrame{
 		    
 		  setVisible(true);
 	}
+
 	
 	void TabPanel()
 	{
@@ -50,6 +54,19 @@ public class Program extends JFrame{
 		tPane.addTab("林巩炼雀", mainPanel);
 		
 		
+		ActionListener order = new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				manager.menuorder(
+						Integer.parseInt(first_txt2.getText()), 
+						first_combo.getItemAt(first_combo.getSelectedIndex()).toString(),
+						first_txt1.getText()
+						);
+			}
+		};
+		first_Button1.addActionListener(order);
+		
+		
 		  
 		JLabel second_Label1 = new JLabel(" 绊按锅龋");
 		second_Label1.setPreferredSize(new Dimension(100, 40));
@@ -80,10 +97,11 @@ public class Program extends JFrame{
 		mainPane2.add(second_Button1);
 		mainPane2.add(second_Button2);
 		mainPane2.add(second_Button3);
-		tPane.addTab("绊按包府", mainPane2);
-		  
+		tPane.addTab("绊按包府", mainPane2);	
+		
 	}
 
+	
 	public static void main(String[] args){
 		new Program();
 	} 
